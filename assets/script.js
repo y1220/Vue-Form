@@ -6,7 +6,11 @@ console.log(result);
 
 function addNumbers() {
   result = result + parseInt(userInput.value);
-  log.push(parseInt(userInput.value));
+  const newLog = {
+    type: "ADD",
+    num: parseInt(userInput.value),
+  };
+  log.push(newLog);
   outputResult(result);
   console.log("current log: ", log);
 } // This function is hoisted to the top of the file, so it can be called before it is defined.
