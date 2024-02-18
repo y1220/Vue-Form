@@ -1,12 +1,53 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-const tweets = ref(['Tweet1', 'Tweet2', 'Tweet3']);
+
+type Tweet = {
+  id: string;
+  description: string;
+};
+const tweets = ref<Tweet[]>([
+  {
+    id: "1",
+    description: "Hello World",
+  },
+  {
+    id: "2",
+    description: "Hello Vite",
+  },
+]);
+  const tweet = ref<Tweet>({
+  id: "",
+  description: "",
+});
+const onsubmit = () => {
+  // tweets.value.push(tweet.value);
+  tweets.value = [
+    ...tweets.value,
+    {
+      id: Math.random().toString(),
+      description: tweet.value.description,
+    },
+  ];
+};
+
+const onDelete = (id: string) => {
+  tweets.value = tweets.value.filter((tweet) => tweet.id !== id);
+};
 </script>
 
 <template>
   <h1>Twitter</h1>
+  <form @submit.prevent="onsubmit">
+    <input type="text" v-model="tweet.description">
+    <button type="submit">Tweet</button>
+  </form>
   <ul>
-    <li v-for="tweet in tweets">{{ tweet }}</li>
+    <li v-for="tweet in tweets">
+      <div>
+        <span>{{ tweet.description }}</span>
+        <button @click="() => onDelete(tweet.id)">Delete</button>
+      </div>
+    </li>
   </ul>
 </template>
 
