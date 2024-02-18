@@ -1,11 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+const tweets = ref(['Tweet1', 'Tweet2', 'Tweet3']);
+</script>
 
 <template>
   <h1>Twitter</h1>
   <ul>
-    <li>Tweet1</li>
-    <li>Tweet2</li>
-    <li>Tweet3</li>
+    <li v-for="tweet in tweets">{{ tweet }}</li>
   </ul>
 </template>
 
