@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, reactive, toRefs, watch, onMounted, onBeforeMount, onUpdated } from 'vue';
 
 
 const item1 = reactive({
@@ -11,6 +11,18 @@ const item1 = reactive({
 const itemName2 = 'cola';
 const itemPrice2 = '2 euro';
 const itemLink2 = 'https://vitejs.dev';
+
+onBeforeMount(() => {
+  console.log('before mount');
+});
+
+onMounted(() => {
+  console.log('mounted');
+});
+
+onUpdated(() => {
+  console.log('updated');
+});
 
 const buy = (itemName: string) => {
   console.log('buy');
@@ -29,12 +41,25 @@ const clear = () => {
 
 const budget = 5;
 
-const priceLabel = computed(() => {
-    if(item1.price <= budget) {
-    return  item1.price + ' euro';
-    } else {
-    return 'Over budget';
-    }
+// const priceLabel = computed(() => {
+//     if(item1.price <= budget) {
+//     return  item1.price + ' euro';
+//     } else {
+//     return 'Over budget';
+//     }
+// });
+
+const priceLabel = ref<string>(item1.price + ' euro');
+const { price } = toRefs(item1);
+// observe price change
+watch(price, (newPrice, oldPrice) => {
+  console.log('previous price: ' + oldPrice);
+  if(newPrice <= budget) {
+    priceLabel.value = newPrice + ' euro';
+    console.log('new price: ' + newPrice);
+  } else {
+    priceLabel.value = 'Over budget';
+  }
 });
 </script>
 
