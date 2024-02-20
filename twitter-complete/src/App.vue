@@ -3,6 +3,7 @@ import TweetForm from './components/TweetForm.vue';
 import TweetList from './components/TweetList.vue';
 import { ref } from 'vue';
 import type { Tweet } from './types/Tweet';
+import SettingsModal from './components/SettingsModal.vue';
 
 const tweets = ref<Tweet[]>([
     {
@@ -16,6 +17,7 @@ const tweets = ref<Tweet[]>([
         text: 'Hello, TypeScript!' }
 ]);
 
+
 const onSubmitForm = (tweet: string) => {
     tweets.value.push({
         id: (tweets.value.length + 1).toString(),
@@ -23,25 +25,48 @@ const onSubmitForm = (tweet: string) => {
     });
     console.log(tweets.value);
 };
+
+const isModalOpen = ref(false);
+const onClickSettings = () => {
+  isModalOpen.value = true;
+  console.log('Settings clicked');
+};
 </script>
 
 <template>
-  <div>
-    <TweetForm @submit="onSubmitForm"/><TweetList/>
+  <div class="container">
+    <div class="header">
+      <button @click="onClickSettings">
+        Settings
+      </button>
+    </div>
+    <Teleport to="body">
+      <SettingsModal v-if="isModalOpen"/>
+    </Teleport>
+    <TweetForm @submit="onSubmitForm"/>
+    <TweetList :tweets="tweets"/>
   </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.container {
+  display: flex;
+  flex-direction: column;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.header {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1em;
+  color: #42b883;
+  margin-bottom: 1em;
+  button {
+    padding: 1em 2em;
+    border-radius: 5px;
+    background-color: #42b883;
+    color: white;
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+  }
 }
 </style>

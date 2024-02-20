@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { ref } from 'vue';
 import type { Tweet } from '../types/Tweet';
 
@@ -13,6 +14,7 @@ const tweets = ref<Tweet[]>([
         id: "3",
         text: 'Hello, TypeScript!' }
 ]);
+console.log('tweets: ' + JSON.stringify(tweets));
 </script>
 
 <template>
