@@ -1,12 +1,20 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
+const tweet = ref('');
+
+const onSubmit = () => {
+  console.log(tweet.value);
+  tweet.value = '';
+};
 </script>
 
 <template>
   <div>
     <form class="tweet-form">
-      <textarea name="" id="" cols="30" rows="10"></textarea>
-      <button type="submit">Tweet</button>
+      <textarea placeholder="insert message" cols="30" rows="10" v-model="tweet"></textarea>
+      <button @click.prevent="onSubmit" type="submit">Tweet</button>
+      <!-- prevent works for avoiding page refresh -->
     </form>
   </div>
 </template>
