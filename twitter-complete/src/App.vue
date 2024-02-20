@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import TweetForm from './components/TweetForm.vue';
+import TweetList from './components/TweetList.vue';
 </script>
 
 <template>
   <div>
-    <TweetForm/>
+    <TweetForm/><TweetList/>
   </div>
 </template>
 
