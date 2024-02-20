@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { Tweet } from '../types/Tweet';
 
-const tweets = ref([
+const tweets = ref<Tweet[]>([
     {
         id: "1",
         text: 'Hello, Vue 3!' },
@@ -29,5 +30,11 @@ ul {
     list-style: none;  /* remove bullet points */
     padding: 0;
     margin: 0;
+}
+
+.tweet-list li {
+    padding: 1em;
+    border-bottom: 1px solid #42b883;
+    font-size: 10em;
 }
 </style>
