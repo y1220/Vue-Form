@@ -1,27 +1,22 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
+import { PropType } from 'vue';
 import type { Tweet } from '../types/Tweet';
 
-const tweets = ref<Tweet[]>([
-    {
-        id: "1",
-        text: 'Hello, Vue 3!' },
-    {
-        id: "2",
-        text: 'Hello, Vite!' },
-    {
-        id: "3",
-        text: 'Hello, TypeScript!' }
-]);
-console.log('tweets: ' + JSON.stringify(tweets));
+const props = defineProps({
+    tweets: {
+        type: Array as PropType<Tweet[]>,
+    }
+});
+
 </script>
 
 <template>
     <div>
         <ul>
-            <li v-for="tweet in tweets" :key="tweet.id">
+            <li v-for="tweet in props.tweets" :key="tweet.id">
                 {{ tweet.text }}
+                <span class="user-name-span">@{{ tweet.userName }}</span>
             </li>
         </ul>
     </div>
@@ -38,5 +33,9 @@ ul {
     padding: 1em;
     border-bottom: 1px solid #42b883;
     font-size: 10em;
+}
+.user-name-span {
+    font-size: 1em;
+    color: #42b883;
 }
 </style>

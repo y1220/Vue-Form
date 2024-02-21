@@ -5,8 +5,8 @@ const tweet = ref('');
 
 const onSubmit = () => {
   console.log(tweet.value);
-  tweet.value = '';
   emits('submit', tweet.value);
+  tweet.value = '';
 };
 // defineEmits is a function that takes an array of strings and returns an object with
 // the same keys, but with the value of any type.

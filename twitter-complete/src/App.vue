@@ -9,19 +9,23 @@ import type { Tweet } from './types/Tweet';
 const tweets = ref<Tweet[]>([
     {
         id: "1",
-        text: 'Hello, Vue 3!' },
+        text: 'Hello, Vue 3!',
+        userName: 'user1'},
     {
         id: "2",
-        text: 'Hello, Vite!' },
+        text: 'Hello, Vite!',
+        userName: 'user2'},
     {
         id: "3",
-        text: 'Hello, TypeScript!' }
+        text: 'Hello, TypeScript!',
+        userName: 'user3'}
 ]);
 
 const onSubmitForm = (tweet: string) => {
     tweets.value.push({
         id: (tweets.value.length + 1).toString(),
-        text: tweet
+        text: tweet,
+        userName: userName.value,
     });
     console.log(tweets.value);
 };
