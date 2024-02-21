@@ -23,7 +23,7 @@ const onCancel = () => {
             <div class="modal-footer">
                 <slot name="footer">
                     <button @click="onSubmit">Ok</button>
-                    <button @click="onCancel">Ok</button>
+                    <button @click="onCancel">Cancel</button>
                 </slot>
             </div>
         </div>
