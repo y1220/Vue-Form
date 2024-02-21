@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const tweet = ref('');
 
@@ -8,6 +8,25 @@ const onSubmit = () => {
   emits('submit', tweet.value);
   tweet.value = '';
 };
+
+// const isValidInput = (input: string) => {
+//   return input.length <= 140;
+// };
+
+const isValidInput = ref(true);
+
+watch(tweet, (newVal, oldVal) => {
+  // console.log('newVal: ' + newVal);
+  console.log('oldVal: ' + oldVal);
+  // if(isValidInput(newVal)) {
+  //   tweet.value = newVal;
+  // }
+    if(newVal.length > 140 || newVal.length < 0) {
+      isValidInput.value = false;
+    } else {
+      isValidInput.value = true;
+    }
+});
 // defineEmits is a function that takes an array of strings and returns an object with
 // the same keys, but with the value of any type.
 const emits = defineEmits(['submit']);
@@ -16,8 +35,8 @@ const emits = defineEmits(['submit']);
 <template>
   <div>
     <form class="tweet-form">
-      <textarea placeholder="insert message" cols="30" rows="10" v-model="tweet"></textarea>
-      <button @click.prevent="onSubmit" type="submit">Tweet</button>
+      <textarea :style="{ color: isValidInput ? 'black' : 'red'}" placeholder="insert message" cols="30" rows="10" v-model="tweet"></textarea>
+      <button :disabled="!isValidInput" @click.prevent="onSubmit" type="submit">Tweet</button>
       <!-- prevent works for avoiding page refresh -->
     </form>
   </div>

@@ -3,7 +3,7 @@ import TweetForm from './components/TweetForm.vue';
 import TweetList from './components/TweetList.vue';
 import SettingsModal from './components/SettingsModal.vue';
 import { userNameKey, updateUserNameKey } from './key';
-import { Ref, provide, ref } from 'vue';
+import { provide, ref } from 'vue';
 import type { Tweet } from './types/Tweet';
 
 const tweets = ref<Tweet[]>([
