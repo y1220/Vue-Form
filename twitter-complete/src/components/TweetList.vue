@@ -9,12 +9,19 @@ const props = defineProps({
     }
 });
 
+const emits = defineEmits(['click']);
+
+
+const onClickTweet = (id: string) => {
+    emits('click', id);
+    console.log(id);
+};
 </script>
 
 <template>
-    <div>
+    <div class="tweet-list">
         <ul>
-            <li v-for="tweet in props.tweets" :key="tweet.id">
+            <li v-for="tweet in props.tweets" :key="tweet.id" @click="() => onClickTweet(tweet.id)">
                 {{ tweet.text }}
                 <span class="user-name-span">@{{ tweet.userName }}</span>
             </li>
@@ -32,7 +39,7 @@ ul {
 .tweet-list li {
     padding: 1em;
     border-bottom: 1px solid #42b883;
-    font-size: 10em;
+    font-size: 1.5em;
 }
 .user-name-span {
     font-size: 1em;
