@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import TweetForm from './components/TweetForm.vue';
 import TweetList from './components/TweetList.vue';
-import { ref } from 'vue';
-import type { Tweet } from './types/Tweet';
 import SettingsModal from './components/SettingsModal.vue';
+import { userNameKey, updateUserNameKey } from './key';
+import { Ref, provide, ref } from 'vue';
+import type { Tweet } from './types/Tweet';
 
 const tweets = ref<Tweet[]>([
     {
@@ -16,7 +17,6 @@ const tweets = ref<Tweet[]>([
         id: "3",
         text: 'Hello, TypeScript!' }
 ]);
-
 
 const onSubmitForm = (tweet: string) => {
     tweets.value.push({
@@ -31,6 +31,22 @@ const onClickSettings = () => {
   isModalOpen.value = true;
   console.log('Settings clicked');
 };
+
+const onSubmittedSettings = () => {
+  isModalOpen.value = false;
+  console.log('Settings submitted: ' + userName);
+};
+
+const userName = ref('');
+const updateUserName = (name: string) => {
+  userName.value = name;
+  console.log('updateUserName: ' + name);
+};
+
+import { readonly } from 'vue';
+
+provide(userNameKey, readonly(userName));
+provide(updateUserNameKey, updateUserName);
 </script>
 
 <template>
@@ -41,8 +57,9 @@ const onClickSettings = () => {
       </button>
     </div>
     <Teleport to="body">
-      <SettingsModal v-if="isModalOpen"/>
+      <SettingsModal @submit="onSubmittedSettings" v-if="isModalOpen"/>
     </Teleport>
+    {{ userName }}
     <TweetForm @submit="onSubmitForm"/>
     <TweetList :tweets="tweets"/>
   </div>
