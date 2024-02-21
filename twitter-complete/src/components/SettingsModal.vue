@@ -33,8 +33,8 @@ const onSubmit = () => {
                 </slot>
             </div>
             <div class="modal-footer">
-                <slot name="footer">
-                    <button @click="onSubmit">Ok</button>
+                <slot style="text-align: center;" name="footer">
+                    <button  @click="onSubmit">Ok</button>
                 </slot>
             </div>
         </div>
@@ -53,6 +53,7 @@ const onSubmit = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .modal-container {
@@ -69,6 +70,18 @@ const onSubmit = () => {
 }
 
 span {
+    font-size: 0.65em;
+    padding: 10px;
+}
+
+.modal-footer button {
+    padding: 1em 2em;
+    border-radius: 5px;
+    background-color: #42b883;
+    color: white;
     font-size: 0.75em;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
 }
 </style>

@@ -42,11 +42,12 @@ const onCancel = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .modal-container {
     width: 300px;
-    height: 400px;
+    height: 200px;
     background-color: white;
     border-radius: 0.5em;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -59,5 +60,16 @@ const onCancel = () => {
 
 span {
     font-size: 0.75em;
+}
+
+.modal-footer button {
+    padding: 1em 2em;
+    border-radius: 5px;
+    background-color: #42b883;
+    color: white;
+    font-size: 0.75em;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
 }
 </style>
